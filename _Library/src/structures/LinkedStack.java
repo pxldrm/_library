@@ -1,31 +1,31 @@
 //************************************************************
 /**
-*	Stack 		Defines attributes for stack object.
+*	LinkedStack 	Defines attributes for linked stack object.
 *	
-*	@author		pxldrm
-*	@since		8/15/2017
+*	@author			pxldrm
+*	@since			8/16/2017
 * 	@update 	
 */
 //************************************************************
 package structures;
 import interfaces.StackADT;
-import java.util.*;
-public class Stack<T> implements StackADT<T>{
+import structures.LinearNode;
+public class LinkedStack<T> implements StackADT<T>{
 //************************************************************
 /**
 *	Variables
 */
 //************************************************************
-	private ArrayList<T> 	stack;
-	private int 			top;
+	private int 			count;
+	private LinearNode<T> 	top;
 //************************************************************
 /**
 *	Constructor
 */
 //************************************************************
-	public 					Stack(){
-		top = 0;
-		stack = new ArrayList<T>();
+	public 					LinkedStack(){
+		count = 0;
+		top = null;
 	}
 //************************************************************
 /**
@@ -33,13 +33,13 @@ public class Stack<T> implements StackADT<T>{
 */
 //************************************************************
 	public int 				size(){
-		return top;
+		return count;
 	}
 	public T 				peek(){
-		if (isEmpty())
+		if (!isEmpty())
 			return null;
 		else
-			return (stack.get(stack.size() - 1));
+			return top.getElement();
 	}
 //************************************************************
 /**
@@ -47,7 +47,7 @@ public class Stack<T> implements StackADT<T>{
 */
 //************************************************************    
 	public boolean 			isEmpty(){
-		return top == 0;
+		return count == 0;
 	}
 //************************************************************
 /**
@@ -55,15 +55,19 @@ public class Stack<T> implements StackADT<T>{
 */
 //************************************************************
 	public void 			push(T element){
-		top++;
-		stack.add(element);
+		LinearNode<T> temp = new LinearNode<T>(element);
+		temp.setNext(top);
+		top = temp;
+		count++;
 	}
 	public T 				pop(){
 		if (isEmpty())
 			return null;
 		else{
-			top--;
-			return stack.remove((stack.size() - 1));
+			T result = top.getElement();
+			top = top.getNext();
+			count--;
+			return result;
 		}		
     }
 //************************************************************
@@ -72,15 +76,6 @@ public class Stack<T> implements StackADT<T>{
 */
 //************************************************************
 	public String 			toString(){
-		String s = "";
-		for (T t: stack){
-			if (t instanceof Object[]){
-				for (int i = 0; i < ((Object[])t).length; i++)
-					s += String.valueOf(((Object[])t)[i]) + ",";
-			}
-			else
-				s += String.valueOf(t) + " ";
-		}
-		return s;
+		return top.toString();
 	}
 }

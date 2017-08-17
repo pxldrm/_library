@@ -1,38 +1,39 @@
 //************************************************************
 /**
-*	StackADT 	Defines interface for generic stack object.
+*	LinearNodeADT 	Defines interface for generic node object.
 *	
-*	@author		pxldrm
-*	@since		8/15/2017
+*	@author			pxldrm
+*	@since			8/16/2017
 * 	@update 	
 */
 //************************************************************
 package interfaces;
-public interface StackADT<T>{
+import structures.LinearNode;
+public interface LinearNodeADT<T>{
 //************************************************************
 /**
 *	Access
 */
 //************************************************************
-	public int 		size();
-	public T 		peek();
+	public T 				getElement();
+	public LinearNode<T> 	getNext();
 //************************************************************
 /**
 *	Boolean
 */
-//************************************************************    
-	public boolean 	isEmpty();
+//************************************************************
+	
 //************************************************************
 /**
 *	Modify
 */
 //************************************************************
-	public void 	push(T element);
-	public T 		pop();
+	public void 			setElement(T element);
+	public void 			setNext(LinearNode<T> node);
 //************************************************************
 /**
 *	toString
 */
 //************************************************************
-	public String 	toString();
+	public String 			toString();
 }
