@@ -4,7 +4,7 @@
 *	
 *	@author		pxldrm
 *	@since		8/15/2017
-* 	@update 	8/17/2017
+* 	@update 	8/18/2017
 */
 //************************************************************
 package structures;
@@ -36,10 +36,7 @@ public class Stack<T> implements StackADT<T>{
 		return count;
 	}
 	public T 				peek(){
-		if (isEmpty())
-			return null;
-		else
-			return (stack.get(0));
+		return stack.get(0);
 	}
 //************************************************************
 /**

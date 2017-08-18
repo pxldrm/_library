@@ -1,31 +1,31 @@
 //************************************************************
 /**
-*	Queue 		Defines attributes for queue object.
+*	List 	Defines attributes for list object.
 *	
-*	@author		pxldrm
-*	@since		8/17/2017
-* 	@update 	8/18/2017
+*	@author			pxldrm
+*	@since			8/18/2017
+* 	@update 	
 */
 //************************************************************
 package structures;
-import interfaces.QueueADT;
-import java.util.*;
-public class Queue<T> implements QueueADT<T>{
+import interfaces.ListADT;
+import java.util.ArrayList;
+public class List<T> implements ListADT<T>{
 //************************************************************
 /**
 *	Variables
 */
 //************************************************************
 	private int 			count;
-	private ArrayList<T> 	queue;
+	private ArrayList<T> 	list;
 //************************************************************
 /**
 *	Construct
 */
 //************************************************************
-	public 					Queue(){
-		count = 0;
-		queue = new ArrayList<T>();
+	public 					List(){
+		count 	= 0;
+		list 	= new ArrayList<T>();
 	}
 //************************************************************
 /**
@@ -35,8 +35,8 @@ public class Queue<T> implements QueueADT<T>{
 	public int 				size(){
 		return count;
 	}
-	public T 				first(){
-		return queue.get(0);
+	public T 				get(int index){
+		return list.get(index);
 	}
 //************************************************************
 /**
@@ -51,18 +51,63 @@ public class Queue<T> implements QueueADT<T>{
 *	Modify
 */
 //************************************************************
-	public void 			enqueue(T element){
+	public void 			push(T element){
+		list.add(0, element);
 		count++;
-		queue.add(element);
 	}
-	public T 				dequeue(){
+	public void 			append(T element){
+		list.add(element);
+		count++;
+	}
+	public void 			insertBefore(T element, T compare){
 		if (isEmpty())
-			return null;
+			list.add(element);
 		else{
+			int i = 0;
+			while (!list.get(i).equals(compare)){
+				if (i < list.size() - 1)
+					i++;
+				else
+					break;
+			}
+			if (list.get(i).equals(compare))
+				list.add(i, element);
+			else
+				list.add(element);
+		}
+		count++;
+	}
+	public void 			insertAfter(T element, T compare){
+		if (isEmpty())
+			list.add(element);
+		else{
+			int i = 0;
+			while (!list.get(i).equals(compare)){
+				if (i < list.size() - 1)
+					i++;
+				else
+					break;
+			}
+			if (i == list.size())
+				list.add(i, element);
+			else
+				list.add(i + 1, element);
+		}
+		count++;
+	}
+	public void 			remove(T compare){
+		int i = 0;
+		while (!list.get(i).equals(compare)){
+			if (i < list.size() - 1)
+				i++;
+			else
+				break;
+		}
+		if (list.get(i).equals(compare)){
+			list.remove(i);
 			count--;
-			return queue.remove(0);
-		}		
-    }
+		}
+	}
 //************************************************************
 /**
 *	toString
@@ -70,7 +115,7 @@ public class Queue<T> implements QueueADT<T>{
 //************************************************************
 	public String 			toString(){
 		String s = "";
-		for (T t: queue){
+		for (T t: list){
 			if (t instanceof Object[]){
 				for (int i = 0; i < ((Object[])t).length; i++)
 					s += String.valueOf(((Object[])t)[i]) + ",";
