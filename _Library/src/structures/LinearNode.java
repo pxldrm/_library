@@ -4,7 +4,7 @@
 *	
 *	@author		pxldrm
 *	@since		8/16/2017
-* 	@update 	
+* 	@update 	8/17/2017
 */
 //************************************************************
 package structures;
@@ -59,12 +59,12 @@ public class LinearNode<T> implements LinearNodeADT<T>{
 //************************************************************
 	public String 			toString(){
 		String s = "";
-			if (element instanceof Object[]){
+			if (element instanceof Object[])
 				for (int i = 0; i < ((Object[])element).length; i++)
 					s += String.valueOf(((Object[])element)[i]) + ",";
-			}
 			else
-				s += String.valueOf(element) + " ";
+				if (element != null)
+					s += String.valueOf(element) + " ";
 			if (next != null)
 				s += next.toString();
 		return s;

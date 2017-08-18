@@ -4,7 +4,7 @@
 *	
 *	@author			pxldrm
 *	@since			8/16/2017
-* 	@update 	
+* 	@update 		8/17/2017
 */
 //************************************************************
 package structures;
@@ -20,7 +20,7 @@ public class LinkedStack<T> implements StackADT<T>{
 	private LinearNode<T> 	top;
 //************************************************************
 /**
-*	Constructor
+*	Construct
 */
 //************************************************************
 	public 					LinkedStack(){
@@ -36,14 +36,14 @@ public class LinkedStack<T> implements StackADT<T>{
 		return count;
 	}
 	public T 				peek(){
-		if (!isEmpty())
+		if (isEmpty())
 			return null;
 		else
 			return top.getElement();
 	}
 //************************************************************
 /**
-*	Booleans
+*	Boolean
 */
 //************************************************************    
 	public boolean 			isEmpty(){
@@ -51,7 +51,7 @@ public class LinkedStack<T> implements StackADT<T>{
 	}
 //************************************************************
 /**
-*	Mutators
+*	Modify
 */
 //************************************************************
 	public void 			push(T element){

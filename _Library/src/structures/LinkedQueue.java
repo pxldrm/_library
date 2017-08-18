@@ -1,31 +1,31 @@
 //************************************************************
 /**
-*	Stack 		Defines attributes for stack object.
+*	LinkedQueue 	Defines attributes for linked queue object.
 *	
-*	@author		pxldrm
-*	@since		8/15/2017
-* 	@update 	8/17/2017
+*	@author			pxldrm
+*	@since			8/17/2017
+* 	@update 	
 */
 //************************************************************
 package structures;
-import interfaces.StackADT;
-import java.util.*;
-public class Stack<T> implements StackADT<T>{
+import interfaces.QueueADT;
+import structures.LinearNode;
+public class LinkedQueue<T> implements QueueADT<T>{
 //************************************************************
 /**
 *	Variables
 */
 //************************************************************
 	private int 			count;
-	private ArrayList<T> 	stack;
+	private LinearNode<T> 	head, tail;
 //************************************************************
 /**
 *	Construct
 */
 //************************************************************
-	public 					Stack(){
-		count = 0;
-		stack = new ArrayList<T>();
+	public 					LinkedQueue(){
+		count 			= 0;
+		head = tail 	= null;
 	}
 //************************************************************
 /**
@@ -35,11 +35,11 @@ public class Stack<T> implements StackADT<T>{
 	public int 				size(){
 		return count;
 	}
-	public T 				peek(){
+	public T 				first(){
 		if (isEmpty())
 			return null;
 		else
-			return (stack.get(0));
+			return head.getElement();
 	}
 //************************************************************
 /**
@@ -54,17 +54,22 @@ public class Stack<T> implements StackADT<T>{
 *	Modify
 */
 //************************************************************
-	public void 			push(T element){
-		count++;
-		stack.add(0, element);
-	}
-	public T 				pop(){
+	public void 			enqueue(T element){
+		LinearNode<T> temp = new LinearNode<T>(element);
 		if (isEmpty())
-			return null;
-		else{
-			count--;
-			return stack.remove(0);
-		}		
+			head = temp;
+		else
+			tail.setNext(temp);
+		tail = temp;
+		count++;
+	}
+	public T 				dequeue(){
+		T result = head.getElement();
+		head = head.getNext();
+		count--;
+		if (isEmpty())
+			tail = null;
+		return result;		
     }
 //************************************************************
 /**
@@ -72,15 +77,6 @@ public class Stack<T> implements StackADT<T>{
 */
 //************************************************************
 	public String 			toString(){
-		String s = "";
-		for (T t: stack){
-			if (t instanceof Object[]){
-				for (int i = 0; i < ((Object[])t).length; i++)
-					s += String.valueOf(((Object[])t)[i]) + ",";
-			}
-			else
-				s += String.valueOf(t) + " ";
-		}
-		return s;
+		return head.toString();
 	}
 }

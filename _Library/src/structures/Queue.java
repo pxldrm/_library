@@ -1,31 +1,31 @@
 //************************************************************
 /**
-*	Stack 		Defines attributes for stack object.
+*	Queue 		Defines attributes for queue object.
 *	
 *	@author		pxldrm
-*	@since		8/15/2017
-* 	@update 	8/17/2017
+*	@since		8/17/2017
+* 	@update 	
 */
 //************************************************************
 package structures;
-import interfaces.StackADT;
+import interfaces.QueueADT;
 import java.util.*;
-public class Stack<T> implements StackADT<T>{
+public class Queue<T> implements QueueADT<T>{
 //************************************************************
 /**
 *	Variables
 */
 //************************************************************
 	private int 			count;
-	private ArrayList<T> 	stack;
+	private ArrayList<T> 	queue;
 //************************************************************
 /**
 *	Construct
 */
 //************************************************************
-	public 					Stack(){
+	public 					Queue(){
 		count = 0;
-		stack = new ArrayList<T>();
+		queue = new ArrayList<T>();
 	}
 //************************************************************
 /**
@@ -35,11 +35,11 @@ public class Stack<T> implements StackADT<T>{
 	public int 				size(){
 		return count;
 	}
-	public T 				peek(){
+	public T 				first(){
 		if (isEmpty())
 			return null;
 		else
-			return (stack.get(0));
+			return (queue.get(0));
 	}
 //************************************************************
 /**
@@ -54,16 +54,16 @@ public class Stack<T> implements StackADT<T>{
 *	Modify
 */
 //************************************************************
-	public void 			push(T element){
+	public void 			enqueue(T element){
 		count++;
-		stack.add(0, element);
+		queue.add(element);
 	}
-	public T 				pop(){
+	public T 				dequeue(){
 		if (isEmpty())
 			return null;
 		else{
 			count--;
-			return stack.remove(0);
+			return queue.remove(0);
 		}		
     }
 //************************************************************
@@ -73,7 +73,7 @@ public class Stack<T> implements StackADT<T>{
 //************************************************************
 	public String 			toString(){
 		String s = "";
-		for (T t: stack){
+		for (T t: queue){
 			if (t instanceof Object[]){
 				for (int i = 0; i < ((Object[])t).length; i++)
 					s += String.valueOf(((Object[])t)[i]) + ",";
